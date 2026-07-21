@@ -38,6 +38,19 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.svg",
   },
+  manifest: "/manifest.json",
+  themeColor: "#1a6b4f",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Hayāt",
+  },
   openGraph: {
     title: "Hayāt — Personal Life OS",
     description:
@@ -56,6 +69,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased bg-background text-foreground font-sans`}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}) }) }`,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

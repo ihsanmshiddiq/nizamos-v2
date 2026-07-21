@@ -5,9 +5,11 @@ import { useApp } from '@/stores/app-store'
 import { QueryProvider } from '@/components/query-provider'
 import { LandingPage } from '@/components/landing/landing-page'
 import { AppShell } from '@/components/app/app-shell'
+import { DashboardPage } from '@/components/dashboard/dashboard-page'
 import { TaskPage } from '@/components/task/task-page'
 import { FinancePage } from '@/components/finance/finance-page'
 import { CyclePage } from '@/components/cycle/cycle-page'
+import { StatsPage } from '@/components/stats/stats-page'
 import { SettingsPage } from '@/components/settings/settings-page'
 
 export default function Home() {
@@ -66,9 +68,11 @@ function Gate() {
 
   return (
     <AppShell>
+      {effectiveView === 'dashboard' && <DashboardPage />}
       {effectiveView === 'task' && <TaskPage />}
       {effectiveView === 'finance' && <FinancePage />}
       {effectiveView === 'cycle' && <CyclePage />}
+      {effectiveView === 'stats' && <StatsPage />}
       {effectiveView === 'settings' && <SettingsPage />}
     </AppShell>
   )

@@ -13,7 +13,7 @@ export type User = {
   currency: string
 }
 
-export type View = 'task' | 'finance' | 'cycle' | 'settings'
+export type View = 'dashboard' | 'task' | 'finance' | 'cycle' | 'stats' | 'settings'
 
 interface AppState {
   user: User | null
@@ -28,7 +28,7 @@ interface AppState {
 export const useApp = create<AppState>((set) => ({
   user: null,
   loading: true,
-  view: 'task',
+  view: 'dashboard',
   setUser: (u) => set({ user: u }),
   setLoading: (b) => set({ loading: b }),
   setView: (v) => set({ view: v }),
@@ -37,12 +37,12 @@ export const useApp = create<AppState>((set) => ({
       const res = await fetch('/api/auth/session', { credentials: 'include' })
       const data = await res.json()
       if (!data.user) {
-        set({ user: null, loading: false, view: 'task' })
+        set({ user: null, loading: false, view: 'dashboard' })
       } else {
         set({ user: data.user, loading: false })
       }
     } catch {
-      set({ user: null, loading: false, view: 'task' })
+      set({ user: null, loading: false, view: 'dashboard' })
     }
   },
 }))

@@ -4,9 +4,11 @@ import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useApp, type View, type User } from '@/stores/app-store'
 import {
+  LayoutDashboard,
   ListChecks,
   Wallet,
   CalendarHeart,
+  BarChart3,
   Settings as SettingsIcon,
   Moon,
   Sun,
@@ -30,9 +32,11 @@ import {
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 const navItems: { id: View; label: string; icon: React.ElementType; hint: string }[] = [
+  { id: 'dashboard', label: 'Beranda', icon: LayoutDashboard, hint: 'Ringkasan hidupmu hari ini' },
   { id: 'task', label: 'Tugas', icon: ListChecks, hint: 'Kebiasaan · Sholat · Hifdz · Target' },
   { id: 'finance', label: 'Keuangan', icon: Wallet, hint: 'Anggaran & tabungan' },
   { id: 'cycle', label: 'Siklus', icon: CalendarHeart, hint: 'Kalender menstruasi' },
+  { id: 'stats', label: 'Statistik', icon: BarChart3, hint: 'Grafik & analitik' },
   { id: 'settings', label: 'Pengaturan', icon: SettingsIcon, hint: 'Preferensi' },
 ]
 
@@ -129,6 +133,25 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+
+      {/* Mobile bottom nav */}
+      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border/60 bg-background/90 px-2 py-1.5 backdrop-blur-xl lg:hidden">
+        {filteredNav.map((item) => {
+          const active = view === item.id
+          return (
+            <button
+              key={item.id}
+              onClick={() => setView(item.id)}
+              className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1.5 text-[10px] transition ${
+                active ? 'text-primary' : 'text-muted-foreground'
+              }`}
+            >
+              <item.icon className={`h-5 w-5 ${active ? 'text-primary' : ''}`} />
+              <span className={`font-medium ${active ? 'text-primary' : ''}`}>{item.label}</span>
+            </button>
+          )
+        })}
+      </nav>
     </div>
   )
 }

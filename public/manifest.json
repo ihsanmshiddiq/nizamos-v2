@@ -1,0 +1,19 @@
+{
+  "name": "Hayāt — Personal Life OS",
+  "short_name": "Hayāt",
+  "description": "A calm operating system for your habits, prayers, hifdz, goals, and finances.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f3ed",
+  "theme_color": "#1a6b4f",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
