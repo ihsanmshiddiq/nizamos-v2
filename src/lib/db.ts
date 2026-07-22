@@ -19,13 +19,12 @@ function createPrismaClient() {
   }
 
   // Turso (production)
-  if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required for Turso production')
   const libsql = createClient({
     url: process.env.DATABASE_URL,
     authToken: process.env.TURSO_AUTH_TOKEN,
   })
   const adapter = new PrismaLibSql(libsql)
-  return new PrismaClient({ adapter })
+  return new PrismaClient({ adapter, datasourceUrl: process.env.DATABASE_URL })
 }
 
 export const db = globalForPrisma.prisma ?? createPrismaClient()
